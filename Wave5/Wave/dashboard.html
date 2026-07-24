@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthHorizon.AI - Dashboard</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="style.css?v=2">
+</head>
+<body class="dashboard-body">
+
+    <!-- Top Navigation -->
+    <nav class="main-nav">
+        <a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="dashboard.html" class="nav-link active"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+        <a href="outbreaks.html" class="nav-link"><i class="fa-solid fa-network-wired"></i> Outbreaks</a>
+        <a href="alerts.html" class="nav-link"><i class="fa-solid fa-bell"></i> Alerts</a>
+        <a href="map.html" class="nav-link"><i class="fa-solid fa-map"></i> Global Map</a>
+        <a href="hospital-resource-exchange.html" class="nav-link"><i class="fa-solid fa-hand-holding-medical"></i> Resource Exchange</a>
+    </nav>
+
+    <!-- Top Section -->
+    <header class="top-section" style="padding-top: 0;">
+        <div class="header-title glass-panel-dark">
+            <i class="fa-solid fa-earth-americas text-neon-blue spinner-icon"></i>
+            <h1>HealthHorizon.AI</h1>
+            <span class="live-badge">LIVE MONITORING</span>
+        </div>
+        
+        <div class="kpi-row">
+            <!-- Counter 1 -->
+            <div class="glass-panel kpi-box kpi-glow-blue">
+                <div class="kpi-icon-wrapper"><i class="fa-solid fa-wave-square kpi-icon text-neon-blue"></i></div>
+                <div class="kpi-details">
+                    <h4>Total Disease Signals Detected</h4>
+                    <div class="kpi-val text-neon-blue" id="kpi-total">0</div>
+                </div>
+            </div>
+            <!-- Counter 2 -->
+            <div class="glass-panel kpi-box kpi-glow-red">
+                <div class="kpi-icon-wrapper"><i class="fa-solid fa-map-location-dot kpi-icon text-neon-red"></i></div>
+                <div class="kpi-details">
+                    <h4>Active Outbreak Regions</h4>
+                    <div class="kpi-val text-neon-red" id="kpi-regions">0</div>
+                </div>
+            </div>
+            <!-- Counter 3 -->
+            <div class="glass-panel kpi-box kpi-glow-purple">
+                <div class="kpi-icon-wrapper"><i class="fa-solid fa-hospital kpi-icon text-neon-purple"></i></div>
+                <div class="kpi-details">
+                    <h4>Hospitals Reporting</h4>
+                    <div class="kpi-val text-neon-purple" id="kpi-hospitals">0</div>
+                </div>
+            </div>
+            <!-- Counter 4 -->
+            <div class="glass-panel kpi-box kpi-glow-green">
+                <div class="kpi-icon-wrapper"><i class="fa-solid fa-satellite-dish kpi-icon text-neon-green"></i></div>
+                <div class="kpi-details">
+                    <h4>News & Social Media Signals</h4>
+                    <div class="kpi-val text-neon-green" id="kpi-social">0</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW Global Statistics Row -->
+        <div class="kpi-row" style="margin-top: 1.5rem;">
+            <!-- New Stat 1 -->
+            <div class="glass-panel kpi-box kpi-glow-blue">
+                <div class="kpi-icon-wrapper" style="font-size: 1.8rem;"><i class="fa-solid fa-virus text-neon-blue"></i></div>
+                <div class="kpi-details">
+                    <h4>Total Diseases Monitored</h4>
+                    <div class="kpi-val text-neon-blue" id="kpi-monitored" style="font-size: 1.6rem;">1,204</div>
+                </div>
+            </div>
+            <!-- New Stat 2 -->
+            <div class="glass-panel kpi-box kpi-glow-red">
+                <div class="kpi-icon-wrapper" style="font-size: 1.8rem;"><i class="fa-solid fa-fire text-neon-red"></i></div>
+                <div class="kpi-details">
+                    <h4>Active Outbreaks (Global)</h4>
+                    <div class="kpi-val text-neon-red" id="kpi-active-outbreaks" style="font-size: 1.6rem;">8</div>
+                </div>
+            </div>
+            <!-- New Stat 3 -->
+            <div class="glass-panel kpi-box kpi-glow-yellow">
+                <div class="kpi-icon-wrapper" style="font-size: 1.8rem;"><i class="fa-solid fa-bell text-neon-yellow"></i></div>
+                <div class="kpi-details">
+                    <h4>Alerts Triggered Today</h4>
+                    <div class="kpi-val text-neon-yellow" id="kpi-alerts-today" style="font-size: 1.6rem;">142</div>
+                </div>
+            </div>
+            <!-- New Stat 4 -->
+            <div class="glass-panel kpi-box kpi-glow-green">
+                <div class="kpi-icon-wrapper" style="font-size: 1.8rem;"><i class="fa-solid fa-database text-neon-green"></i></div>
+                <div class="kpi-details">
+                    <h4>Live Data Sources</h4>
+                    <div class="kpi-val text-neon-green" id="kpi-sources" style="font-size: 1.6rem;">45,891</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Dashboard Grid -->
+    <main class="dashboard-grid dashboard-layout-enhanced">
+
+        <!-- Left Column: Live Data Feed Panel -->
+        <div class="dash-col-left">
+            <div class="glass-panel feed-panel" style="height: 100%;">
+                <div class="panel-title">
+                    <div class="title-with-icon">
+                        <i class="fa-solid fa-satellite-dish text-neon-green"></i>
+                        <span>Live Data Feed (Recent Signals)</span>
+                    </div>
+                    <div class="pulse-indicator"></div>
+                </div>
+                <div class="feed-container hidden-scroll" id="live-data-feed">
+                    <!-- Cards injected via JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Middle Column: Top Diseases & Trends -->
+        <div class="dash-col-right" style="display: flex; flex-direction: column; gap: 15px;">
+            <!-- Top Diseases -->
+            <div class="glass-panel" style="display: flex; flex-direction: column; padding: 1.2rem; min-height: 250px;">
+                <div class="panel-title">
+                    <div class="title-with-icon">
+                        <i class="fa-solid fa-list-ol text-neon-purple"></i>
+                        <span>Top Diseases Detected</span>
+                    </div>
+                </div>
+                <div class="top-disease-list hidden-scroll" id="top-diseases-list" style="overflow-y: auto; flex: 1;">
+                    <script>
+                        async function updateTopDiseases() {
+                            try {
+                                const response = await fetch('http://localhost:8000/api/signals');
+                                const data = await response.json();
+                                if (!data || data.length === 0) return;
+
+                                const counts = {};
+                                data.forEach(d => {
+                                    const disease = d.detected_disease || 'Unknown';
+                                    counts[disease] = (counts[disease] || 0) + 1;
+                                });
+
+                                const sorted = Object.entries(counts)
+                                    .sort((a, b) => b[1] - a[1])
+                                    .slice(0, 5);
+
+                                const container = document.getElementById('top-diseases-list');
+                                // Only update the inner content, keep the script itself or just append?
+                                // Let's create a wrapper to avoid clearing the script.
+                                let listWrapper = document.getElementById('top-diseases-wrapper');
+                                if (!listWrapper) {
+                                    listWrapper = document.createElement('div');
+                                    listWrapper.id = 'top-diseases-wrapper';
+                                    container.appendChild(listWrapper);
+                                }
+
+                                listWrapper.innerHTML = sorted.map(([disease, count]) => `
+                                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: rgba(255,255,255,0.03); border-radius: 4px; margin-bottom: 8px;">
+                                        <div style="color: #fff; font-weight: bold;">${disease}</div>
+                                        <div class="text-neon-purple" style="font-weight: bold;">${count} Signals</div>
+                                    </div>
+                                `).join('');
+                            } catch (error) {
+                                console.error('Error updating top diseases:', error);
+                            }
+                        }
+                        updateTopDiseases();
+                        setInterval(updateTopDiseases, 10000);
+                    </script>
+                </div>
+            </div>
+
+            <!-- Disease Trend Analytics -->
+            <div class="glass-panel" style="display: flex; flex-direction: column; padding: 1.2rem; flex: 1;">
+                <div class="panel-title">
+                    <div class="title-with-icon">
+                        <i class="fa-solid fa-chart-bar text-neon-blue"></i>
+                        <span>Disease Trend Analytics</span>
+                    </div>
+                </div>
+                <div style="flex: 1; min-height: 200px; position: relative;">
+                    <canvas id="diseaseTrendChart"></canvas>
+                </div>
+                <div id="trend-indicators" style="display: flex; justify-content: space-around; padding-top: 10px; font-size: 0.85rem;">
+                    <!-- Indicators injected via JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Predictions -->
+        <div class="dash-col-right" style="display: flex; flex-direction: column; gap: 15px;">
+            <!-- Risk Predictions Chart -->
+            <div class="glass-panel" style="display: flex; flex-direction: column; padding: 1.2rem; min-height: 250px;">
+                <div class="panel-title">
+                    <div class="title-with-icon">
+                        <i class="fa-solid fa-radar text-neon-red"></i>
+                        <span>Outbreak Risk Models</span>
+                    </div>
+                </div>
+                <div style="flex: 1; min-height: 200px; position: relative;">
+                    <canvas id="predictionRadarChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Risk Prediction Cards -->
+            <div class="glass-panel" style="display: flex; flex-direction: column; padding: 1.2rem; flex: 1;">
+                <div class="panel-title">
+                    <div class="title-with-icon">
+                        <i class="fa-solid fa-triangle-exclamation text-neon-yellow"></i>
+                        <span>Outbreak Risk Predictions</span>
+                    </div>
+                </div>
+                <div class="prediction-cards-container hidden-scroll" id="prediction-cards" style="overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 10px; padding-top: 10px;">
+                    <!-- Cards injected via JS -->
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Scripts -->
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Custom logic -->
+    <script src="dashboard.js"></script>
+</body>
+</html>

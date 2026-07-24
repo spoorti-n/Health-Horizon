@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthHorizon.AI</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+    <!-- Top Navigation Container -->
+    <div style="position: absolute; top: 0; left: 0; width: 100%; z-index: 100;">
+        <nav class="main-nav">
+            <a href="index.html" class="nav-link active"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="dashboard.html" class="nav-link"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+            <a href="outbreaks.html" class="nav-link"><i class="fa-solid fa-network-wired"></i> Outbreaks</a>
+            <a href="alerts.html" class="nav-link"><i class="fa-solid fa-bell"></i> Alerts</a>
+            <a href="map.html" class="nav-link"><i class="fa-solid fa-map"></i> Global Map</a>
+            <a href="hospital-resource-exchange.html" class="nav-link"><i class="fa-solid fa-hand-holding-medical"></i> Resource Exchange</a>
+        </nav>
+    </div>
+
+    <div id="landing-container">
+        <!-- Background Glows -->
+        <div class="glow-blob blob-1"></div>
+        <div class="glow-blob blob-2"></div>
+        
+        <!-- Top Right Indicator -->
+        <div class="live-indicator glass-panel">
+            <div class="ping"></div>
+            <span>SYSTEM ACTIVE // NORMAL</span>
+        </div>
+        
+        <!-- Core Content -->
+        <main class="hero-content">
+            <div class="hero-subtitle">
+                <i class="fa-solid fa-satellite-dish"></i> GLOBAL MONITORING AI
+            </div>
+            
+            <h1 class="hero-title">
+                Health<span class="text-neon-cyan">Horizon</span><span class="text-neon-red">.AI</span>
+            </h1>
+            
+            <p class="hero-description">
+                AI autonomously monitoring anomaly disease signals from thousands of hospitals, social media streams, and local news worldwide to predict outbreaks before they happen.
+            </p>
+            
+            <div class="hero-actions">
+                <a href="dashboard.html" class="btn btn-primary glass-panel">
+                    <i class="fa-solid fa-chart-line" style="margin-right: 8px;"></i> View Dashboard
+                </a>
+                <a href="map.html" class="btn btn-outline glass-panel">
+                    <i class="fa-solid fa-earth-americas" style="margin-right: 8px;"></i> Live Outbreak Map
+                </a>
+            </div>
+        </main>
+        
+        <!-- 3D Globe Container -->
+        <div id="globe-viz"></div>
+    </div>
+
+    <!-- Scripts for 3D Globe -->
+    <script src="https://unpkg.com/three"></script>
+    <script src="https://unpkg.com/globe.gl"></script>
+    <script src="globe-init.js"></script>
+</body>
+</html>

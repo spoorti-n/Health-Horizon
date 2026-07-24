@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthHorizon.AI - Alerts</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Outfit:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="style.css?v=2">
+</head>
+
+<body class="dashboard-body">
+
+    <!-- Top Navigation -->
+    <nav class="main-nav">
+        <a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="dashboard.html" class="nav-link"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+        <a href="outbreaks.html" class="nav-link"><i class="fa-solid fa-network-wired"></i> Outbreaks</a>
+        <a href="alerts.html" class="nav-link active"><i class="fa-solid fa-bell"></i> Alerts</a>
+        <a href="map.html" class="nav-link"><i class="fa-solid fa-map"></i> Global Map</a>
+        <a href="hospital-resource-exchange.html" class="nav-link"><i class="fa-solid fa-hand-holding-medical"></i>
+            Resource Exchange</a>
+    </nav>
+
+    <!-- Top Section (Header) -->
+    <header class="top-section" style="padding-top: 0;">
+        <div class="header-title glass-panel-dark" style="justify-content: center;">
+            <i class="fa-solid fa-triangle-exclamation text-neon-red spinner-icon" style="animation: none;"></i>
+            <h1 style="font-size: 1.5rem;">Outbreak Alerts</h1>
+            <span class="live-badge">LIVE MONITORING</span>
+        </div>
+    </header>
+
+    <!-- Main Layout -->
+    <main class="dashboard-grid outbreaks-layout-grid" style="padding-top: 1.5rem;">
+
+        <!-- Top Row: Alert Statistics -->
+        <div class="kpi-row" style="grid-column: 1 / -1; margin-bottom: 0;">
+            <div class="glass-panel kpi-box kpi-glow-red" style="padding: 1rem;">
+                <div class="kpi-icon-wrapper" style="font-size: 1.5rem;"><i
+                        class="fa-solid fa-triangle-exclamation text-neon-red"></i></div>
+                <div class="kpi-details">
+                    <h4>Critical Alerts Today</h4>
+                    <div class="kpi-val text-neon-red" style="font-size: 1.4rem;" id="stat-alerts-critical">14</div>
+                </div>
+            </div>
+            <div class="glass-panel kpi-box kpi-glow-yellow" style="padding: 1rem;">
+                <div class="kpi-icon-wrapper" style="font-size: 1.5rem;"><i
+                        class="fa-solid fa-bell text-neon-yellow"></i></div>
+                <div class="kpi-details">
+                    <h4>Warnings This Week</h4>
+                    <div class="kpi-val text-neon-yellow" style="font-size: 1.4rem;" id="stat-alerts-warning">89</div>
+                </div>
+            </div>
+            <div class="glass-panel kpi-box kpi-glow-green" style="padding: 1rem;">
+                <div class="kpi-icon-wrapper" style="font-size: 1.5rem;"><i
+                        class="fa-solid fa-shield-check text-neon-green"></i></div>
+                <div class="kpi-details">
+                    <h4>Resolved Incidents</h4>
+                    <div class="kpi-val text-neon-green" style="font-size: 1.4rem;" id="stat-alerts-resolved">342</div>
+                </div>
+            </div>
+            <div class="glass-panel kpi-box kpi-glow-blue" style="padding: 1rem;">
+                <div class="kpi-icon-wrapper" style="font-size: 1.5rem;"><i
+                        class="fa-solid fa-clock-rotate-left text-neon-blue"></i></div>
+                <div class="kpi-details">
+                    <h4>Avg. Response Time</h4>
+                    <div class="kpi-val text-neon-blue" style="font-size: 1.4rem;">4m 12s</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Middle Row: Alerts List & Alert Timeline -->
+        <aside class="panel-wrapper glass-panel" style="grid-column: span 6; height: 350px;">
+            <div class="panel-title">
+                <div class="title-with-icon">
+                    <i class="fa-solid fa-list-ul text-neon-red"></i>
+                    <span>Active Outbreak Alerts</span>
+                </div>
+                <div class="pulse-indicator red-pulse"></div>
+            </div>
+            <div class="feed-container hidden-scroll" id="alerts-feed">
+                <!-- Alerts injected via JS -->
+            </div>
+        </aside>
+
+        <div class="glass-panel"
+            style="grid-column: span 6; display: flex; flex-direction: column; padding: 1.2rem; height: 350px;">
+            <div class="panel-title">
+                <div class="title-with-icon">
+                    <i class="fa-solid fa-timeline text-neon-blue"></i>
+                    <span>Alert Timeline (24h)</span>
+                </div>
+            </div>
+            <div class="vertical-timeline hidden-scroll" id="alert-timeline"
+                style="overflow-y: auto; flex: 1; padding: 0.5rem;">
+                <!-- Timeline items injected via JS -->
+            </div>
+        </div>
+
+        <!-- Bottom Row: Severity Levels Chart & Notification Panel -->
+        <div class="glass-panel chart-container" style="grid-column: span 5; padding: 1rem;">
+            <div class="panel-title" style="font-size: 0.85rem;"><i class="fa-solid fa-chart-pie text-neon-purple"></i>
+                Alert Severity Breakdown</div>
+            <div class="chart-wrapper"><canvas id="severityBreakdownChart"></canvas></div>
+        </div>
+
+        <div class="glass-panel" style="grid-column: span 7; display: flex; flex-direction: column; padding: 1.2rem;">
+            <div class="panel-title">
+                <div class="title-with-icon">
+                    <i class="fa-solid fa-message text-neon-green"></i>
+                    <span>Recent System Notifications</span>
+                </div>
+            </div>
+            <div class="notifications-panel hidden-scroll" id="system-notifications"
+                style="overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 0.8rem;">
+                <!-- Notifications injected via JS -->
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Scripts -->
+    <!-- Chart JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Core JS -->
+    <script src="dashboard.js"></script>
+</body>
+
+</html>
